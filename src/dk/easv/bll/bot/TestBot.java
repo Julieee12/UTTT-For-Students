@@ -135,11 +135,6 @@ public class TestBot implements IBot{
         return winningMoves;
     }
 
-    public void canWinWholeGame(IGameState state){
-
-    }
-
-
 
     @Override
     public String getBotName() {
