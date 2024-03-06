@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class MonteCarloTest implements IBot{
 
-    private final int totalAllowedTime = 600; //in milliseconds
+    private final int totalAllowedTime = 100; //in milliseconds
 
     private int player = 1; //which player is this bot?
     String botName = "Gemini Ver2.0";
@@ -59,12 +59,13 @@ public class MonteCarloTest implements IBot{
                 System.out.println("did 2 moves");
             } //end while
             System.out.println("finished a match");
+            System.out.println(sim.getTotalMoves());
             if(sim.getGameOver().equals(GameOverState.Win)){ //if the bot won
                 Nodes.get(index).addWin();
-                Nodes.get(index).setTotalScore(Nodes.get(index).getTotalScore() + 10 + sim.getTotalMoves());
+                Nodes.get(index).setTotalScore(Nodes.get(index).getTotalScore() + 2000 - sim.getTotalMoves());
             } else if(sim.gameOver.equals(GameOverState.Loss)) {
                 Nodes.get(index).addWin();
-                Nodes.get(index).setTotalScore(Nodes.get(index).getTotalScore() - 10 + sim.getTotalMoves());
+                Nodes.get(index).setTotalScore(Nodes.get(index).getTotalScore() - 2000 + sim.getTotalMoves());
             } else { // if it tied
                 Nodes.get(index).addLoss();
                 Nodes.get(index).setTotalScore(Nodes.get(index).getTotalScore() + sim.getTotalMoves());
@@ -79,6 +80,7 @@ public class MonteCarloTest implements IBot{
         Node bestNode = Nodes.get(0);
 
         for(Node n: Nodes){
+            System.out.println("score of " +  Nodes.indexOf(n) + ": " + n.totalScore);
             if(n.totalScore > bestNode.totalScore){
                 bestNode = n;
             }
@@ -262,7 +264,11 @@ public class MonteCarloTest implements IBot{
 
                 //Check macro win
                 if (isWin(macroBoard, new Move(macroX, macroY), "" + currentPlayer))
-                    gameOver = GameOverState.Win;
+                    if(currentPlayer == player){
+                        gameOver = GameOverState.Win;
+                    } else {
+                        gameOver = GameOverState.Loss;
+                    }
                 else if (isTie(macroBoard, new Move(macroX, macroY)))
                     gameOver = GameOverState.Tie;
             }
