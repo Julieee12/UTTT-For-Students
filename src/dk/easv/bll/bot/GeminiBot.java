@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MonteCarloTest implements IBot{
+public class GeminiBot implements IBot{
 
     private final int totalAllowedTime = 1000; //in milliseconds
 
     private int player = 1; //which player is this bot?
-    String botName = "Gemini Ver2.0";
+    String botName = "Gemini";
 
     @Override
     public IMove doMove(IGameState state) {
