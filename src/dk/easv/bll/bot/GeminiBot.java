@@ -46,19 +46,14 @@ public class GeminiBot implements IBot{
                 if(!avail.isEmpty()){
                     IMove move = avail.get(rand.nextInt(avail.size()));
                     sim.updateGame(move);
-                } else{
-                    System.out.println("it's empty!!");
                 }
 
                 if(sim.getGameOver() == GameOverState.Active){
-                    System.out.println("amount of available moves: " + avail.size());
                     IMove move2 = avail.get(rand.nextInt(avail.size()));
                     sim.updateGame(move2);
                 }
-                System.out.println("did 2 moves");
+
             } //end while
-            System.out.println("finished a match");
-            System.out.println(sim.getTotalMoves());
             if(sim.getGameOver().equals(GameOverState.Win)){ //if the bot won
                 Nodes.get(index).addWin();
                 Nodes.get(index).setTotalScore(Nodes.get(index).getTotalScore() + 2000 - sim.getTotalMoves());
@@ -69,7 +64,6 @@ public class GeminiBot implements IBot{
                 Nodes.get(index).addLoss();
                 Nodes.get(index).setTotalScore(Nodes.get(index).getTotalScore() + sim.getTotalMoves());
             }
-            System.out.println(index);
             index++;
             if(index >= Nodes.size()){
                 index = 0;
@@ -79,7 +73,6 @@ public class GeminiBot implements IBot{
         Node bestNode = Nodes.get(0);
 
         for(Node n: Nodes){
-            System.out.println("score of " +  Nodes.indexOf(n) + ": " + n.totalScore);
             if(n.totalScore > bestNode.totalScore){
                 bestNode = n;
             }
