@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class MonteCarloTest implements IBot{
 
-    private final int totalAllowedTime = 100; //in milliseconds
+    private final int totalAllowedTime = 1000; //in milliseconds
 
     private int player = 1; //which player is this bot?
     String botName = "Gemini Ver2.0";
@@ -30,7 +30,6 @@ public class MonteCarloTest implements IBot{
         }
 
 
-        //int originalMoveNo = state.getMoveNumber();
         int index = 0; //index of which node we are looking at
         long currentTime = System.currentTimeMillis();
         Random rand = new Random();
@@ -112,7 +111,6 @@ public class MonteCarloTest implements IBot{
 
 
     public class Node{
-
         private int winCount = 0;
         private int lossCount = 0;
         private int totalCount = 0;
